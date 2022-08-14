@@ -1,0 +1,44 @@
+$iconWidth: 56px;
+.sidenav-toggle {
+  display: none;
+  padding: 0;
+  margin: 8px;
+  min-width: $iconWidth;
+  @media (max-width: 720px) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  mat-icon {
+    font-size: 30px;
+    height: $iconWidth;
+    width: $iconWidth;
+    line-height: $iconWidth;
+    color: white;
+  }
+}
+
+.toolbar-content {
+  width: 100%;
+  height: 100%;
+}
+
+.toolbar-logo {
+  height: 40px;
+  width: 80px;
+  background: white;
+}
+
+.vertical-divider {
+  height: 100%;
+  width: 1px;
+  margin-right: 2%;
+  background: white;
+}
+
+// .mat-toolbar {
+//   position: fixed;
+//   // overflow:auto;
+//   z-index: 1;
+//   // width: 100% !important;
+// }

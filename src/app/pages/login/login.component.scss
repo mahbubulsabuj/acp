@@ -1,0 +1,104 @@
+.login {
+  width: 100%;
+  &-img {
+    background-image: url('../../../assets/images/acp_landing_page.png');
+    width: 70%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    h1 {
+      color: white;
+      font-size: 35px;
+      font-weight: 700;
+    }
+    p {
+      color: white;
+      font-size: 20px;
+
+    }
+    .hexagon {
+      margin-bottom: 80px;
+      width: 100px;
+      height: 55px;
+      background-color: white;
+      position: relative;
+      background-image: url('../../../assets/images/ACP_Logo.png');
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
+
+    .hexagon,
+    .hexagon:before,
+    .hexagon:after {
+      background-color: white;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
+    }
+
+    .hexagon:before,
+    .hexagon:after {
+      content: '';
+      position: absolute;
+      background-color: white;
+      left: 22px;
+      width: 57px;
+      height: 57px;
+      transform: rotate(145deg) skew(22.5deg);
+    }
+
+    .hexagon:before {
+      top: -29px;
+    }
+
+    .hexagon:after {
+      top: 27px;
+    }
+
+    .hexagon span {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100px;
+      height: 55px;
+      background-color: white;
+      background-image: url('../../../assets/images/ACP_Logo.png');
+      background-repeat: no-repeat;
+      background-size: cover;
+      z-index: 1;
+    }
+  }
+  &-form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    &-logo {
+      margin-top: 20vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      img {
+        width: 100px;
+      }
+    }
+    &-title {
+      h1 {
+        text-align: center;
+      }
+    }
+    .login-form-group {
+      width: 80%;
+      margin: auto;
+      .mat-form-field {
+        margin-top: -10px;
+        width: 100%;
+      }
+      button {
+        width: 100%;
+      }
+    }
+  }
+}

@@ -1,0 +1,64 @@
+.add-user {
+    width: 100%;
+    padding: 40px;
+    .upload-image {
+      width: 50%;
+      margin: 40px auto;
+      &-placeholder {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+  
+        button {
+          height: 200px;
+          width: 200px;
+          .mat-icon {
+            object-fit: cover;
+            font-size: 150px;
+            height: 170px;
+            width: 170px;
+            border-radius: 50%;
+          }
+          img {
+            object-fit: cover;
+            height: 170px;
+            width: 170px;
+            border-radius: 50%;
+          }
+        }
+      }
+      &-title {
+        padding-top: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      &-button {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        .mat-button {
+          width: 100%;
+        }
+      }
+    }
+    .general-information {
+      width: 50%;
+      margin: auto;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      .form-container {
+          .display-name {
+              .mat-form-field {
+                  width: 100%;
+              }
+          }
+      }
+    }
+   
+  }
+  
+  .gender {
+      padding-bottom: 10px;
+  }

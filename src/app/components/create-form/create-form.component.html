@@ -1,0 +1,207 @@
+<h1>Add Form</h1>
+<form [formGroup]="questionForm">
+  <div class="ques-form-wrapper">
+    <div class="ques-form-wrapper__title-desc">
+      <mat-card fxLayout="column">
+        <mat-form-field appearance="standard">
+          <input matInput placeholder="Title" formControlName="title" />
+        </mat-form-field>
+        <mat-form-field appearance="standard">
+          <input
+            #desc
+            matInput
+            maxlength="200"
+            placeholder="Form Description"
+            formControlName="desc"
+          />
+          <mat-hint align="start" style="color: green">
+            Character left {{ 200 - desc.value.length || 200 }}</mat-hint
+          >
+        </mat-form-field>
+      </mat-card>
+    </div>
+    <div class="spacer"></div>
+    <div class="ques-form-wrapper__ques-form" fxLayout="row">
+      <mat-card style="width: 77%;">
+        <div fxLayout="row" fxLayoutAlign="space-between">
+          <mat-form-field
+            appearance="standard"
+            class="ques-form-wrapper__ques-title"
+          >
+            <input
+              matInput
+              placeholder="Question"
+              formControlName="questionTitle"
+            />
+          </mat-form-field>
+          <mat-form-field
+            appearance="outline"
+            class="ques-form-wrapper__ques-type"
+          >
+            <mat-label>Question Type</mat-label>
+            <mat-select
+              formControlName="questionType"
+              (selectionChange)="onQuesTypeChange()"
+            >
+              <mat-option
+                *ngFor="let questionType of questionTypes"
+                [value]="questionType"
+                >{{ questionType }}</mat-option
+              >
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <ng-container
+          formArrayName="questionAnswers"
+          *ngIf="
+            this.questionForm.controls['questionType'].value == 'Checkbox' ||
+            this.questionForm.controls['questionType'].value ==
+              'Multiple Choice'
+          "
+        >
+          <ng-container
+            *ngFor="let answers of questionAnswers.controls; let index = index"
+          >
+            <div
+              [formGroupName]="index"
+              fxLayout="row"
+              fxLayoutAlign="none center"
+            >
+              <mat-icon style="padding: 10px">{{
+                this.questionForm.controls["questionType"].value == "Checkbox"
+                  ? "check_box_outline_blank"
+                  : "radio_button_unchecked"
+              }}</mat-icon>
+              <mat-form-field appearance="standard" style="width: 40%">
+                <input matInput formControlName="option" placeholder="Answer" />
+              </mat-form-field>
+              <button
+                mat-icon-button
+                color="warn"
+                (click)="deleteAnswer(index)"
+                *ngIf="
+                  this.questionForm.controls['questionAnswers'].value.length !==
+                  1
+                "
+              >
+                <mat-icon>delete</mat-icon>
+              </button>
+            </div>
+          </ng-container>
+        </ng-container>
+        <!-- //Linear Scale -->
+        <div
+          class="ques-form-wrapper__linear-scale"
+          fxLayout="column"
+          *ngIf="
+            this.questionForm.controls['questionType'].value == 'Linear Scale'
+          "
+        >
+          <mat-form-field>
+            <input matInput placeholder="Description" />
+          </mat-form-field>
+          <div flexLayout="row">
+            <mat-form-field appearance="standard" style="width: 10%">
+              <mat-select formControlName="labelLeft">
+                <mat-option
+                  *ngFor="let number of numberOptions"
+                  [value]="number"
+                  >{{ number }}</mat-option
+                >
+              </mat-select>
+            </mat-form-field>
+            <span style="margin: 10px">to</span>
+            <mat-form-field appearance="standard" style="width: 10%">
+              <mat-select formControlName="labelRight">
+                <mat-option
+                  *ngFor="let number of numberOptions"
+                  [value]="number"
+                  >{{ number }}</mat-option
+                >
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <mat-form-field style="width: 40%">
+            <input matInput placeholder="Label (Left)" />
+          </mat-form-field>
+          <mat-form-field style="width: 40%">
+            <input matInput placeholder="Label (Right)" />
+          </mat-form-field>
+        </div>
+        <!-- Short Text -->
+        <mat-form-field
+          fxLayout="column"
+          *ngIf="
+            this.questionForm.controls['questionType'].value === 'Short Text'
+          "
+        >
+          <input
+            matInput
+            placeholder="Short Answer Text"
+            formControlName="shortTextAnswer"
+          />
+        </mat-form-field>
+        <!-- File Upload -->
+        <div
+          *ngIf="
+            this.questionForm.controls['questionType'].value === 'File Upload'
+          "
+        >
+          <mat-form-field
+            appearance="standard"
+            fxLayout="column"
+            style="width: 20%"
+          >
+            <mat-label>Allowed File Types</mat-label>
+            <mat-select formControlName="allowedFileTypes" multiple>
+              <mat-option
+                *ngFor="let fileType of allowedFileTypes"
+                [value]="fileType"
+                >{{ fileType }}</mat-option
+              >
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field
+            appearance="standard"
+            fxLayout="column"
+            style="width: 20%"
+          >
+            <mat-label>Maximum File Size</mat-label>
+            <mat-select formControlName="maximumFileSize">
+              <mat-option
+                *ngFor="let fileSize of maximumFileSizes"
+                [value]="fileSize"
+                >{{ fileSize }}</mat-option
+              >
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <button
+          mat-raised-button
+          color="primary"
+          (click)="addQuestionAnswer()"
+          *ngIf="
+            this.questionForm.controls['questionType'].value ===
+              'Multiple Choice' ||
+            this.questionForm.controls['questionType'].value === 'Checkbox'
+          "
+        >
+          Add Option
+        </button>
+        <div fxLayout="row" fxLayoutAlign="end">
+          <button mat-icon-button><mat-icon>content_copy</mat-icon></button>
+          <button mat-icon-button><mat-icon>delete</mat-icon></button>
+        </div>
+      </mat-card>
+      <button mat-raised-button style="height: 40px; width: 40px; margin-left: 20px"><mat-icon>add</mat-icon></button>
+    </div>
+    <div
+      fxLayout="row"
+      fxLayoutAlign="space-between"
+      style="padding-left: 120px; padding-right: 120px; padding-top: 20px"
+    >
+      <button mat-button (click)="goPreviousPage()">Discard</button>
+      <button mat-raised-button type="submit" (click)="onQuestionFormSubmit()" color="primary">Save Form</button>
+    </div>
+  </div>
+</form>

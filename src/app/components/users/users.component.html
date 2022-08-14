@@ -1,0 +1,101 @@
+<div class="users" *ngIf="!outlet.isActivated">
+  <h1>Forms</h1>
+  <div fxLayout="row" fxLayoutAlign="space-between center">
+    <mat-card
+      class="users__search-wrapper"
+      fxLayout="row"
+      fxLayoutAlign="center center"
+    >
+      <mat-select
+        style="width: 15%"
+        fxLayoutAlign="center center"
+        [(ngModel)]="searchType"
+      >
+        <mat-select-trigger>
+          <mat-icon style="padding-left: 10px">{{
+            searchType === "display_name" ? "group" : "mail"
+          }}</mat-icon>
+        </mat-select-trigger>
+        <mat-option value="display_name">
+          <mat-icon>group</mat-icon> <span>Display Name</span>
+        </mat-option>
+        <mat-option value="email">
+          <mat-icon>mail</mat-icon> <span>Email</span>
+        </mat-option>
+      </mat-select>
+      <mat-form-field
+        style="margin-top: 10px; width: 100%"
+        class="users__search-field"
+        appearance="outline"
+      >
+        <input
+          matInput
+          [placeholder]="
+            searchType === 'display_name'
+              ? 'Search by display name'
+              : 'Search email'
+          "
+          (keyup)="applyFilter($event)"
+        />
+      </mat-form-field>
+    </mat-card>
+    <button mat-button color="primary" class="users__create-user-btn" routerLink="create">
+      Create User
+    </button>
+  </div>
+  <div class="users__table">
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z0">
+      <ng-container matColumnDef="display_name">
+        <th mat-header-cell *matHeaderCellDef>Name</th>
+        <td mat-cell *matCellDef="let user">
+          <div fxLayout="row" fxLayoutAlign="none center">
+            <div mat-button class="users__user-icon">
+              <span fxLayoutAlign="center center" style="padding-top: 5px">{{
+                user.display_name[0]
+              }}</span>
+            </div>
+            <div class="users__display-name">{{ user.display_name }}</div>
+          </div>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="email">
+        <th mat-header-cell *matHeaderCellDef>Email</th>
+        <td mat-cell *matCellDef="let user">{{ user.email }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="role">
+        <th mat-header-cell *matHeaderCellDef>Role</th>
+        <td mat-cell *matCellDef="let user">{{ user.role }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="last_login">
+        <th mat-header-cell *matHeaderCellDef>Last Login</th>
+        <td mat-cell *matCellDef="let user">{{ user.last_login }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="status">
+        <th mat-header-cell *matHeaderCellDef>Status</th>
+        <td mat-cell *matCellDef="let user">
+          <mat-slide-toggle
+            color="primary"
+            [(ngModel)]="user.status"
+          ></mat-slide-toggle>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="tableColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: tableColumns"></tr>
+      <tr mat-footer-row *matFooterRowDef="['disclaimer']"></tr>
+
+      <!-- <tr class="mat-row" *matNoDataRow>
+        <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+      </tr> -->
+      <ng-container matColumnDef="disclaimer">
+        <td mat-footer-cell *matFooterCellDef colspan="2">{{this.dataSource.filteredData.length}} item(s)</td>
+      </ng-container>
+    </table>
+  </div>
+</div>
+
+<router-outlet #outlet="outlet"></router-outlet>

@@ -1,0 +1,21 @@
+.ques-form-wrapper {
+  width: 100%;
+  &__title-desc {
+    margin: auto;
+    width: 80%;
+  }
+  &__ques-form {
+    margin-left: 10%;
+    width: 100%;
+  }
+  &__ques-title {
+    width: 50%;
+  }
+  &__ques-type {
+    width: 30%;
+  }
+}
+
+.spacer {
+  margin-top: 20px;
+}

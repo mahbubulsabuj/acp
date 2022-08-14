@@ -1,0 +1,47 @@
+<div class="login" fxLayout="row">
+  <div class="login-img">
+    <div class="hexagon"><span></span></div>
+    <h1>Auditing and Certification Platform</h1>
+    <p>Standardization & Innovation Brought to Auditing, Certification & Inspection Bodies Worldwide
+    </p>
+  </div>
+  <div>
+    <div class="login-form">
+      <div>
+        <div>
+          <div class="login-form-logo">
+            <img src="../../../assets/ACP_Logo.png" alt="" />
+          </div>
+        </div>
+        <div class="col-12">
+          <div class="login-form-title">
+            <h1>LOGIN</h1>
+          </div>
+          <form [formGroup]="loginForm" class="login-form-group">
+            <mat-form-field appearance="outline">
+              <mat-label> Email </mat-label>
+              <input matInput formControlName="email" />
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+              <mat-label> Password </mat-label>
+              <input [type]="hide ? 'password' : 'text'" matInput formControlName="password" />
+              <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                [attr.aria-pressed]="hide">
+                <mat-icon>{{
+                  hide ? 'visibility_off' : 'visibility'
+                  }}</mat-icon>
+              </button>
+              <mat-error></mat-error>
+            </mat-form-field>
+            <button mat-raised-button color="primary" (click)="onLoginFormSubmit()" [disabled]="
+                this.loginForm.controls['email'].invalid ||
+                this.loginForm.controls['password'].invalid
+              ">
+              Login
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

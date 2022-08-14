@@ -1,0 +1,171 @@
+<div class="add-user">
+    <h1>Add User</h1>
+    <div class="upload-image">
+      <div class="upload-image-placeholder">
+        <button mat-fab color="white">
+          <img
+            src="https://images.unsplash.com/photo-1657299170129-858a7f31a794?ixlib=rb-1.2.1&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80"
+            alt=""
+          />
+        </button>
+      </div>
+      <div class="upload-image-title">
+        <h3>Max 5 MB, jpg or jpeg or png photo supported only.</h3>
+      </div>
+      <div class="upload-image-button">
+        <button mat-raised-button color="white">UPLOAD PHOTO</button>
+      </div>
+    </div>
+    <div class="general-information">
+      <form [formGroup]="userForm" class="form-container">
+        <div fxLayout="row">
+          <div class="salutation">
+            <mat-form-field appearance="outline">
+              <mat-label> Salutation </mat-label>
+              <mat-select formControlName="prefix">
+                <mat-option
+                  *ngFor="let salutation of salutations"
+                  [value]="salutation"
+                >
+                  {{ salutation }}
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="this.userForm.controls['prefix'].invalid">
+                This Field is required.
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="name" fxLayout="row">
+            <mat-form-field appearance="outline" style="padding-left: 5px">
+              <mat-label> First Name </mat-label>
+              <input matInput formControlName="firstName" />
+              <mat-error *ngIf="this.userForm.controls['firstName'].invalid">
+                This Field is required.
+              </mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="outline" style="padding-left: 5px">
+              <mat-label> Last Name </mat-label>
+              <input matInput formControlName="lastName" />
+              <mat-error *ngIf="this.userForm.controls['lastName'].invalid">
+                This Field is required.
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+  
+        <div class="display-name">
+          <mat-form-field appearance="outline">
+            <mat-label> Display Name </mat-label>
+            <input matInput formControlName="displayName" />
+          </mat-form-field>
+        </div>
+        <div class="gender">
+          <mat-label style="font-size: 18px">Gender</mat-label>
+          <br />
+          <br />
+          <mat-radio-group formControlName="gender">
+            <mat-radio-button
+              *ngFor="let gender of genders"
+              [value]="gender"
+              style="padding-right: 10px"
+              >{{ gender }}</mat-radio-button
+            >
+          </mat-radio-group>
+        </div>
+        <div fxLayout="row">
+          <mat-form-field
+            appearance="outline"
+            style="width: 49%; padding-right: 2%"
+          >
+            <mat-label>Date of Birth</mat-label>
+            <input
+              matInput
+              formControlName="birthDate"
+              [matDatepicker]="datepicker"
+            />
+            <mat-hint>MM/DD/YYYY</mat-hint>
+            <mat-datepicker-toggle
+              matSuffix
+              [for]="datepicker"
+            ></mat-datepicker-toggle>
+            <mat-datepicker #datepicker>
+              <mat-datepicker-actions>
+                <button mat-button matDatepickerCancel>Cancel</button>
+                <button mat-raised-button color="primary" matDatepickerApply>
+                  Apply
+                </button>
+              </mat-datepicker-actions>
+            </mat-datepicker>
+            <mat-error *ngIf="this.userForm.controls['birthDate'].invalid">
+              This Field is required.
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field appearance="outline" style="width: 49%">
+            <mat-label>Nationality</mat-label>
+            <mat-select>
+              <mat-option
+                *ngFor="let country of countries"
+                [value]="country.name.common"
+              >
+                {{ country.name.common }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div fxLayout="row">
+          <mat-form-field
+            appearance="outline"
+            style="width: 49%; padding-right: 2%"
+          >
+            <mat-label>Role</mat-label>
+            <mat-select>
+              <mat-option *ngFor="let role of roles" [value]="role">
+                {{ role }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field appearance="outline" style="width: 49%">
+            <mat-label>Nationality</mat-label>
+            <mat-select>
+              <mat-option *ngFor="let region of regions" [value]="region">
+                {{ region }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+ 
+        <div fxLayout="row">
+            <mat-form-field
+              appearance="outline"
+              style="width: 49%; padding-right: 2%"
+            >
+            <mat-icon matSuffix>email</mat-icon>
+              <mat-label>Email</mat-label>
+              <input
+                matInput
+                formControlName="email"
+                
+              />
+            
+          
+              <mat-error *ngIf="this.userForm.controls['email'].invalid">
+                This Field is required.
+              </mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="outline" style="width: 49%">
+                <mat-label>Phone number</mat-label>
+                <input matInput formControlName="phone" required>
+                <mat-icon matSuffix>phone</mat-icon>
+                <mat-hint>Include area code</mat-hint>
+            </mat-form-field>
+          </div>
+          <div fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="10px">
+            <button mat-raised-button color="warn">Cancel</button>
+            <button mat-raised-button color="primary" [disabled]="this.userForm.invalid">Save</button>
+          </div>
+      </form>
+      
+    </div>
+
+  </div>
+  

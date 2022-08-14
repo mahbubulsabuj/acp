@@ -1,0 +1,57 @@
+.users {
+  &__search-wrapper {
+    height: 45px;
+    width: 50%;
+  }
+  &__search-field {
+    width: 70%;
+    ::ng-deep {
+      .mat-form-field-appearance-outline .mat-form-field-outline {
+        color: white;
+      }
+      mat-form-field {
+        .mat-hint,
+        input,
+        ::placeholder,
+        .mat-form-field-label {
+          color: white;
+        }
+      }
+      .mat-form-field-outline-start,
+      .mat-form-field-outline-gap,
+      .mat-form-field-outline-end {
+        color: white;
+      }
+    }
+  }
+  &__create-user-btn {
+    width: 15%;
+    height: 50px;
+    margin-bottom: 10px;
+    border: 1px solid brown;
+    border-radius: 5px;
+    background: white;
+    color: brown;
+  }
+  &__table {
+    ::ng-deep {
+      table {
+        width: 100%;
+      }
+    }
+  }
+  &__table {
+    margin-top: 20px;
+    border: 1px solid rgba(0,0,0,.54);
+  }
+  &__user-icon {
+    width: 30px;
+    height: 30px;
+    background: grey;
+    border-radius: 50%;
+    color: white;
+  }
+  &__display-name {
+    margin-left: 10px;
+  }
+}
